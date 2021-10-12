@@ -8,22 +8,21 @@
     tools:context=".MainActivity">
 
     <ProgressBar
+        android:id="@+id/idPBLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/idPBLoading"
-        android:visibility="visible"
         android:layout_centerInParent="true"
-        />
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/idRHome"
+        android:id="@+id/idRLHome"
         android:visibility="gone"
         >
 
         <ImageView
-            android:id="@+id/idIVBlack"
+            android:id="@+id/idIVBack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -129,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_above="@id/idRvWeather"
+            android:layout_above="@id/idRVWeather"
             android:layout_marginBottom="10dp"
             android:text="Today's Weather Forecast"
             android:textColor="@color/white"
@@ -138,7 +137,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/idRvWeather"
+            android:id="@+id/idRVWeather"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         backIV = findViewById(R.id.idIVBack);
         iconIV = findViewById(R.id.idIVIcon);
         searchIV = findViewById(R.id.idIVSearch);
-        weatherRVModalArrayList = new ArrayList<>();
+        weatherRVModalArrayList = new ArrayList<WeatherRVModal>();
         weatherRVAdapter = new WeatherRVAdapter(this,weatherRVModalArrayList);
         weatherRV.setAdapter(weatherRVAdapter);
 
@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                     String city = adr.getLocality();
                     if(city!=null && !city.equals("")) {
                         cityName = city;
+                        break;
+                        //Log.d("getCityName",cityName);
                     } else {
                         Log.d("MainActivity","CITY NOT FOUND");
                         Toast.makeText(this,"User City Not Found..",Toast.LENGTH_SHORT).show();
@@ -136,11 +138,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getWeatherInfo(String cityName) {
-        String url = "http://api.weatherapi.com/v1/forecast.json?key=f3a469527d9c49ad93e164800211210&q=" + cityName + "&days=1&aqi=yes&alerts=yes";
+        String url = "https://api.weatherapi.com/v1/forecast.json?key=f3a469527d9c49ad93e164800211210&q=" + cityName + "&days=1&aqi=yes&alerts=yes";
         cityNameTV.setText(cityName);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 loadingPB.setVisibility(View.GONE);
@@ -153,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     int isDay = response.getJSONObject("current").getInt("is_day");
                     String condition = response.getJSONObject("current").getJSONObject("condition").getString("text");
                     String conditionIcon = response.getJSONObject("current").getJSONObject("condition").getString("icon");
-                    Picasso.get().load("http:".concat(conditionIcon)).into(iconIV);
+                    Picasso.get().load("https:".concat(conditionIcon)).into(iconIV);
                     conditionTV.setText(condition);
                     if(isDay==1) {
                         //morning
@@ -169,8 +173,9 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0; i<hourArray.length(); i++) {
                         JSONObject hourObj =  hourArray.getJSONObject(i);
                         String time = hourObj.getString("time");
+                       // Log.d("RecyclerView",time);
                         String temper = hourObj.getString("temp_c");
-                        String img = hourObj.getJSONObject("condition").getString("ïcon");
+                        String img = hourObj.getJSONObject("condition").getString("icon");
                         String wind = hourObj.getString("wind_kph");
                         weatherRVModalArrayList.add(new WeatherRVModal(time, temper,img,wind));
                     }
@@ -178,11 +183,14 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this, "Please enter Valid city name..",Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+               // Log.d("getWeatherInfo", toString(error));
             }
         });
 

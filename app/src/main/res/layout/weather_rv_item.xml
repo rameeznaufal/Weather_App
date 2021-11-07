@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     app:cardElevation="6dp"
-    app:cardCornerRadius="18dp"
-    android:background="@android:color/transparent">
+    app:cardCornerRadius="12dp"
+    android:background="@null">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,19 +27,23 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
         this.weatherRVModalArrayList = weatherRVModalArrayList;
     }
 
+
+
     @NonNull
     @Override
     public WeatherRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.weather_rv_item, parent,false);
+        //Log.d("Creating","Created");
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weather_rv_item, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull WeatherRVAdapter.ViewHolder holder, int position) {
 
+        //Log.d("Binding", position +" Binding");
         WeatherRVModal modal = weatherRVModalArrayList.get(position);
         holder.temperatureTV.setText(modal.getTemperature() + "°c");
-        Picasso.get().load("http:".concat(modal.getIcon())).into(holder.conditionIV);
+        Picasso.get().load("https:".concat(modal.getIcon())).into(holder.conditionIV);
         holder.windTV.setText(modal.getWindSpeed() + "Km/h");
         SimpleDateFormat input =  new SimpleDateFormat("yyyy-MM-dd hh:mm");
         SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
@@ -53,7 +58,7 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
 
     @Override
     public int getItemCount() {
-        return 0;
+        return weatherRVModalArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -69,4 +74,5 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
 
         }
     }
+
 }

@@ -39,14 +39,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
     private RelativeLayout homeRL;
-    private TextView cityNameTV, temperatureTV, conditionTV;
-    private ProgressBar loadingPB;
+    private TextView cityNameTV, temperatureTV, conditionTV, fromTV;
     private TextInputEditText cityEdt;
-    private ImageView backIV, iconIV, searchIV;
+    private ImageView backIV, iconIV, searchIV, logoLoading, pictrez;
     private RecyclerView weatherRV;
     private ArrayList<WeatherRVModal> weatherRVModalArrayList;
     private WeatherRVAdapter weatherRVAdapter;
@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         homeRL = findViewById(R.id.idRLHome);
-        loadingPB = findViewById(R.id.idPBLoading);
+        logoLoading = findViewById(R.id.idLogoLoading);
+        fromTV = findViewById(R.id.idTVFrom);
+        pictrez = findViewById(R.id.idPictrez);
         cityNameTV = findViewById(R.id.idTVCityName);
         temperatureTV = findViewById(R.id.idTVTemperature);
         conditionTV = findViewById(R.id.idTVCondition);
@@ -147,7 +149,14 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                loadingPB.setVisibility(View.GONE);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                logoLoading.setVisibility(View.GONE);
+                fromTV.setVisibility(View.GONE);
+                pictrez.setVisibility(View.GONE);
                 homeRL.setVisibility(View.VISIBLE);
                 weatherRVModalArrayList.clear();
 

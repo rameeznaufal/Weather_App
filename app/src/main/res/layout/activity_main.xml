@@ -7,12 +7,36 @@
     android:background="@color/black_shade_1"
     tools:context=".MainActivity">
 
-    <ProgressBar
-        android:id="@+id/idPBLoading"
+    <ImageView
+        android:id="@+id/idLogoLoading"
+        android:layout_width="117dp"
+        android:layout_height="227dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/sunny"
+        android:visibility="visible" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="visible" />
+        android:layout_centerHorizontal="true"
+        android:text="from"
+        android:textAlignment="center"
+        android:id="@+id/idTVFrom"
+        android:textColor="@color/gray"
+        android:visibility="visible"
+        android:layout_below="@id/idLogoLoading"
+        android:layout_marginTop="160dp"
+        />
+
+    <ImageView
+        android:id="@+id/idPictrez"
+        android:layout_width="110dp"
+        android:layout_height="68dp"
+        android:layout_below="@id/idTVFrom"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="4dp"
+        android:src="@drawable/coderez" />
 
     <RelativeLayout
         android:id="@+id/idRLHome"

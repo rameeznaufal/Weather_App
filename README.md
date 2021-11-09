@@ -10,3 +10,5 @@ An Android based weather application with additional features coming soon
 * access approximate location only in the foreground
 * have full network access  
 * recieve data from internet  
+## Feedback
+Feel free to inform us of any bugs or additional feature requests by raising issues. We would eagerly look into it and give you a valid response if found essential
